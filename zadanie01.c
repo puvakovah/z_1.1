@@ -5,21 +5,24 @@
 #define OK 0
 #define FAIL 1
 
-void vypis_sudoku(int a[SIZE][SIZE])
+void vypis_sudoku(int *sudoku)
 {
+     int s[SIZE][SIZE];
+     
      srand(time(NULL));
+     s[SIZE][SIZE]=*sudoku;
 
      for (int row = 1; row <= SIZE; row++) {
      for (int col = 1; col <= SIZE; col++) {
-          a[row][col]=rand()%9+1;//zatial iba pomocne vygenerovanie cisel do sudoku
+          s[row][col]=rand()%9+1;//zatial iba pomocne vygenerovanie cisel do sudoku
           if(col%3==0)
           {
-               printf("%d ", a[row][col]);
+               printf("%d ", s[row][col]);
                printf("\t");
           }
           else
           {
-               printf("%d ", a[row][col]);
+               printf("%d ", s[row][col]);
           }
         }
      if(row%3==0)
@@ -33,10 +36,7 @@ int pozicie(int *sudoku, int row, int col, int num)
 {
      int s[SIZE][SIZE];
 
-     for(int i=0; i<SIZE; i++)
-     {
-          s[i][i]= *sudoku;
-     }
+     s[SIZE][SIZE]=*sudoku;
      for(int i=0; i<SIZE; i++)//kontrola riadku a stlpca ci je tam este mozne vypisat cislo
      {
           if(s[row][i] == num || s[i][col] == num)
@@ -46,6 +46,6 @@ int pozicie(int *sudoku, int row, int col, int num)
 
 void main(void)
 {
-     int sudoku[SIZE][SIZE];
+     int *sudoku;
      vypis_sudoku(sudoku);
 }
