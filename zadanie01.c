@@ -10,17 +10,21 @@ void vypis_sudoku(int a[SIZE][SIZE])
 
         for (int row = 1; row <= SIZE; row++) {
         for (int col = 1; col <= SIZE; col++) {
-          if(col%3==1)
+          if(col%3==0)
           {
-               printf("\t%d ", a[row][col]);
+               printf("%d ", a[row][col]);
+               printf("\t");
           }
           else
           {
-               printf("1 ", a[row][col]);
+               printf("%d ", a[row][col]);
           }
 
         }
-        printf("\n");
+        if(row%3==0)
+          printf("\n\n");
+        else
+          printf("\n");
     } 
 }
 
