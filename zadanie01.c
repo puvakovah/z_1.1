@@ -14,3 +14,9 @@ void vypis_sudoku(int a[SIZE][SIZE])
         printf("\n");
     } 
 }
+
+int main()
+{
+     int sudoku[SIZE][SIZE];
+     vypis_sudoku(sudoku);
+}
