@@ -9,12 +9,10 @@ void vypis_sudoku(int *sudoku)
 {
      int s[SIZE][SIZE];
      
-     srand(time(NULL));
      s[SIZE][SIZE]=*sudoku;
 
      for (int row = 1; row <= SIZE; row++) {
      for (int col = 1; col <= SIZE; col++) {
-          s[row][col]=rand()%9+1;//zatial iba pomocne vygenerovanie cisel do sudoku
           if(col%3==0)
           {
                printf("%d ", s[row][col]);
@@ -63,18 +61,12 @@ void generuj_sudoku(int *sudoku, int row, int col)
           if(pozicie(sudoku,row,col,num))
           {
               s[row][col]=num;
-              vypis_sudoku(sudoku);  
           }     
      }
+    
 }
 void main(void)
 {
      int *sudoku;
-     for(int row=1; row<=SIZE; row++)
-     {
-          for(int col=0; col<=SIZE; col++)
-          {
-               generuj_sudoku(sudoku,row,col);
-          }
-     }
+     vypis_sudoku(sudoku); 
 }
