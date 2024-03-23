@@ -13,7 +13,7 @@ void vypis_sudoku(int *sudoku)
      {
           for(int col=1;col<=SIZE;col++)
           {
-               sudoku=&s[row][col];
+               sudoku=s[row][col];
           }
      }
 
@@ -40,7 +40,14 @@ int pozicie(int *sudoku, int row, int col, int num)//funkcia na kontrolu, ci moz
 {
      int s[SIZE][SIZE];
 
-     s[SIZE][SIZE]=*sudoku;
+          for(row=1;row<=SIZE;row++)
+     {
+          for(col=1;col<=SIZE;col++)
+          {
+               sudoku=s[row][col];
+          }
+     }
+     
      for(int i=0; i<SIZE; i++)//kontrola riadku a stlpca
      {
           if(s[row][i] == num || s[i][col] == num)
@@ -61,7 +68,13 @@ void generuj_sudoku(int *sudoku, int row, int col)
      int s[SIZE][SIZE];
      srand(time(NULL));
 
-     s[SIZE][SIZE]=*sudoku;
+     for(row=1;row<=SIZE;row++)
+     {
+          for(col=1;col<=SIZE;col++)
+          {
+               sudoku=s[row][col];
+          }
+     }
      for(int num=1; num<=SIZE; num++)
      {
           if(pozicie(sudoku,row,col,num))
