@@ -68,6 +68,12 @@ void generuj_sudoku(int *sudoku, int row, int col)
 void main(void)
 {
      int *sudoku;
-     generuj_sudoku(sudoku);
+     for(int row=1;row<=SIZE;row++)
+     {
+          for(int col=1;col<=SIZE;col++)
+          {
+               generuj_sudoku(sudoku,row,col);
+          }
+     } 
      vypis_sudoku(sudoku); 
 }
