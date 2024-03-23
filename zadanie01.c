@@ -68,5 +68,6 @@ void generuj_sudoku(int *sudoku, int row, int col)
 void main(void)
 {
      int *sudoku;
+     generuj_sudoku(sudoku);
      vypis_sudoku(sudoku); 
 }
