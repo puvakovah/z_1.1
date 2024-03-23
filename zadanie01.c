@@ -9,7 +9,13 @@ void vypis_sudoku(int *sudoku)
 {
      int s[SIZE][SIZE];
      
-     s[SIZE][SIZE]=*sudoku;
+     for(int row=1;row<=SIZE;row++)
+     {
+          for(int col=1;col<=SIZE;col++)
+          {
+               sudoku=&s[row][col];
+          }
+     }
 
      for (int row = 1; row <= SIZE; row++) {
      for (int col = 1; col <= SIZE; col++) {
