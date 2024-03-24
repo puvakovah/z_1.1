@@ -11,12 +11,12 @@ void vypis_sudoku(int *sudoku)
      for (int col = 1; col <= SIZE; col++) {
           if(col%3==0)
           {
-               printf("%d ", *sudoku+row+col);
+               printf("%d ", *sudoku+row*SIZE+col);
                printf("\t");
           }
           else
           {
-               printf("%d ", *sudoku+row+col);
+               printf("%d ", *sudoku+row*SIZE+col);
           }
         }
      if(row%3==0)
@@ -30,14 +30,14 @@ int pozicie(int *sudoku, int row, int col, int num)//funkcia na kontrolu, ci moz
 {
      for(int i=0; i<SIZE; i++)//kontrola riadku a stlpca
      {
-          if(*sudoku+row == num || *sudoku+col == num)
+          if(*sudoku+i*SIZE+col == num || *sudoku+i*SIZE+row== num)
           return 0;
      } 
      for(int i=0; i<3; i++)//schema 3x3
      {
           for(int j=0; j<3; j++)
           {
-               if(*sudoku+i+j == num)
+               if(*sudoku+i*SIZE+j == num)
                return 0;
           }
      }
@@ -53,18 +53,24 @@ void generuj_sudoku(int *sudoku, int row, int col)
           {
               *sudoku=num;
           }     
-     }
-    
+     }   
 }
-void main(void)
-{
-     int *sudoku;
-     for(int row=1;row<=SIZE;row++)
+
+void nahodne_sudoku(void) {
+    int *s;
+    for(int row=0;row<SIZE;row++)
+    {
+     for(int col=0;col<SIZE;col++)
      {
-          for(int col=1;col<=SIZE;col++)
-          {
-               generuj_sudoku(sudoku,row,col);
-          }
-     } 
-     vypis_sudoku(sudoku); 
+          generuj_sudoku(s,row,col);   
+     }
+    }
+
+    vypis_sudoku(s);
+}
+
+int main()
+{
+     nahodne_sudoku();
+     return 0;
 }
