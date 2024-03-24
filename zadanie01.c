@@ -7,26 +7,16 @@
 
 void vypis_sudoku(int *sudoku)
 {
-     int s[SIZE][SIZE];
-     
-     for(int row=1;row<=SIZE;row++)
-     {
-          for(int col=1;col<=SIZE;col++)
-          {
-               sudoku=s[row][col];
-          }
-     }
-
      for (int row = 1; row <= SIZE; row++) {
      for (int col = 1; col <= SIZE; col++) {
           if(col%3==0)
           {
-               printf("%d ", s[row][col]);
+               printf("%d ", *sudoku);
                printf("\t");
           }
           else
           {
-               printf("%d ", s[row][col]);
+               printf("%d ", *sudoku);
           }
         }
      if(row%3==0)
@@ -38,26 +28,16 @@ void vypis_sudoku(int *sudoku)
 
 int pozicie(int *sudoku, int row, int col, int num)//funkcia na kontrolu, ci moze byt cislo vlozene na danu poziciu
 {
-     int s[SIZE][SIZE];
-
-          for(row=1;row<=SIZE;row++)
-     {
-          for(col=1;col<=SIZE;col++)
-          {
-               sudoku=s[row][col];
-          }
-     }
-     
      for(int i=0; i<SIZE; i++)//kontrola riadku a stlpca
      {
-          if(s[row][i] == num || s[i][col] == num)
+          if(*sudoku+row == num || *sudoku+col == num)
           return 0;
      } 
      for(int i=0; i<3; i++)//schema 3x3
      {
           for(int j=0; j<3; j++)
           {
-               if(s[i][j] == num)
+               if(*sudoku == num)
                return 0;
           }
      }
@@ -65,21 +45,13 @@ int pozicie(int *sudoku, int row, int col, int num)//funkcia na kontrolu, ci moz
 
 void generuj_sudoku(int *sudoku, int row, int col)
 {
-     int s[SIZE][SIZE];
      srand(time(NULL));
 
-     for(row=1;row<=SIZE;row++)
-     {
-          for(col=1;col<=SIZE;col++)
-          {
-               sudoku=s[row][col];
-          }
-     }
      for(int num=1; num<=SIZE; num++)
      {
           if(pozicie(sudoku,row,col,num))
           {
-              s[row][col]=num;
+              sudoku=num;
           }     
      }
     
