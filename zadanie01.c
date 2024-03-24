@@ -12,7 +12,7 @@ void vypis_sudoku(int *sudoku)
           if(col%3==0)
           {
                printf("%d ", *sudoku+row*SIZE+col);
-               printf("\t");
+               printf("  ");
           }
           else
           {
