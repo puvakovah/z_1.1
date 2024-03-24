@@ -57,16 +57,17 @@ void generuj_sudoku(int *sudoku, int row, int col)
 }
 
 void nahodne_sudoku(void) {
-    int *s;
+    int s[SIZE][SIZE];
+    int *sudoku=&s[0][0];
     for(int row=0;row<SIZE;row++)
     {
      for(int col=0;col<SIZE;col++)
      {
-          generuj_sudoku(s,row,col);   
+          generuj_sudoku(sudoku,row,col);   
      }
     }
 
-    vypis_sudoku(s);
+    vypis_sudoku(sudoku);
 }
 
 int main()
