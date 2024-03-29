@@ -11,12 +11,12 @@ void vypis_sudoku(int *sudoku)
      for (int col = 1; col <= SIZE; col++) {
           if(col%3==0)
           {
-               printf("%d ", *sudoku+row*SIZE+col);
+               printf("%d ", sudoku[row*SIZE+col]);
                printf("  ");
           }
           else
           {
-               printf("%d ", *sudoku+row*SIZE+col);
+               printf("%d ", sudoku[row*SIZE+col]);
           }
         }
      if(row%3==0)
@@ -30,14 +30,14 @@ int pozicie(int *sudoku, int row, int col, int num)//funkcia na kontrolu, ci moz
 {
      for(int i=0; i<SIZE; i++)//kontrola riadku a stlpca
      {
-          if(*sudoku+i*SIZE+col == num || *sudoku+i*SIZE+row== num)
+          if(sudoku[i*SIZE+col] == num || sudoku[i*SIZE+row]== num)
           return 0;
      } 
      for(int i=0; i<3; i++)//schema 3x3
      {
           for(int j=0; j<3; j++)
           {
-               if(*sudoku+i*SIZE+j == num)
+               if(sudoku[i*SIZE+j] == num)
                return 0;
           }
      }
@@ -56,9 +56,8 @@ void generuj_sudoku(int *sudoku, int row, int col)
      }   
 }
 
-void nahodne_sudoku(void) {
-    int s[SIZE][SIZE];
-    int *sudoku=&s[0][0];
+void nahodne_sudoku(void) 
+{   int *sudoku;
     for(int row=0;row<SIZE;row++)
     {
      for(int col=0;col<SIZE;col++)
