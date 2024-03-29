@@ -60,7 +60,8 @@ void generuj_sudoku(int *sudoku, int row, int col)
 
 void nahodne_sudoku(void) 
 {   
-     int *sudoku;
+     int *sudoku=(int*)malloc(sizeof(int));
+     
      for(int row=0;row<SIZE;row++)
      {
      for(int col=0;col<SIZE;col++)
