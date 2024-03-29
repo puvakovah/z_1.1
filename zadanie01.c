@@ -11,12 +11,12 @@ void vypis_sudoku(int *sudoku)
      for (int col = 1; col <= SIZE; col++) {
           if(col%3==0)
           {
-               printf("%d ", sudoku[row*SIZE+col]);
+               printf("%d ", *sudoku+row*SIZE+col);
                printf("  ");
           }
           else
           {
-               printf("%d ", sudoku[row*SIZE+col]);
+               printf("%d ", *sudoku+row*SIZE+col);
           }
         }
      if(row%3==0)
@@ -30,43 +30,46 @@ int pozicie(int *sudoku, int row, int col, int num)//funkcia na kontrolu, ci moz
 {
      for(int i=0; i<SIZE; i++)//kontrola riadku a stlpca
      {
-          if(sudoku[i*SIZE+col] == num || sudoku[i*SIZE+row]== num)
-          return 0;
+          if(*sudoku+i*SIZE+col == num || *sudoku+i*SIZE+row== num)
+          return 1;
      } 
      for(int i=0; i<3; i++)//schema 3x3
      {
           for(int j=0; j<3; j++)
           {
-               if(sudoku[i*SIZE+j] == num)
-               return 0;
+               if(*sudoku+i*SIZE+j == num)
+               return 1;
           }
      }
+     return 0;
 }
 
 void generuj_sudoku(int *sudoku, int row, int col)
 {
+     int num; 
+     
      srand(time(NULL));
 
-     for(int num=1; num<=SIZE; num++)
+     do
      {
-          if(pozicie(sudoku,row,col,num))
-          {
-              *sudoku=num;
-          }     
-     }   
+          num=rand()%SIZE+1;
+     }while(pozicie(sudoku,row,col,num));
+
+     *(sudoku+row*SIZE+col)=num;
 }
 
 void nahodne_sudoku(void) 
-{   int *sudoku;
-    for(int row=0;row<SIZE;row++)
-    {
+{   
+     int *sudoku;
+     for(int row=0;row<SIZE;row++)
+     {
      for(int col=0;col<SIZE;col++)
      {
           generuj_sudoku(sudoku,row,col);   
      }
-    }
+     }
 
-    vypis_sudoku(sudoku);
+     vypis_sudoku(sudoku);
 }
 
 int main()
