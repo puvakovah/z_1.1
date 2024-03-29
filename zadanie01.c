@@ -1,29 +1,24 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
+
 #define SIZE 9
 #define OK 0
 #define FAIL 1
 
 void vypis_sudoku(int *sudoku)
 {
-     for (int row = 1; row <= SIZE; row++) {
-     for (int col = 1; col <= SIZE; col++) {
-          if(col%3==0)
-          {
-               printf("%d ", *sudoku+row*SIZE+col);
-               printf("  ");
-          }
-          else
-          {
-               printf("%d ", *sudoku+row*SIZE+col);
-          }
+     for (int row = 0; row < SIZE; row++) {
+        for (int col = 0; col < SIZE; col++) {
+            printf("%d ", *(sudoku + row * SIZE + col));
+            if ((col + 1) % 3 == 0 && col < SIZE - 1)
+                printf("| ");
         }
-     if(row%3==0)
-          printf("\n\n");
-     else
-          printf("\n");
-    } 
+        printf("\n");
+        if ((row + 1) % 3 == 0 && row < SIZE - 1)
+            printf("------+-------+------\n");
+    }
+    printf("\n");
 }
 
 int pozicie(int *sudoku, int row, int col, int num)//funkcia na kontrolu, ci moze byt cislo vlozene na danu poziciu
@@ -31,44 +26,47 @@ int pozicie(int *sudoku, int row, int col, int num)//funkcia na kontrolu, ci moz
      for(int i=0; i<SIZE; i++)//kontrola riadku a stlpca
      {
           if(*sudoku+i*SIZE+col == num || *sudoku+i*SIZE+row== num)
-          return 1;
+          return FAIL;
      } 
      for(int i=0; i<3; i++)//schema 3x3
      {
           for(int j=0; j<3; j++)
           {
                if(*sudoku+i*SIZE+j == num)
-               return 1;
+               return FAIL;
           }
      }
-     return 0;
+     return OK;
 }
 
-void generuj_sudoku(int *sudoku, int row, int col)
+void generuj_sudoku(int *sudoku)
 {
      int num; 
      
      srand(time(NULL));
 
-     do
+     for(int row=0;row<SIZE;row++)
      {
-          num=rand()%SIZE+1;
-     }while(pozicie(sudoku,row,col,num));
+          for(int col=0;col<SIZE;col++)
+          {
+               do
+               {
+                    num=rand()%SIZE+1;
+               }while(pozicie(sudoku,row,col,num));
+               
+               *(sudoku+row*SIZE+col)=num;
+          }
+     }
+    
 
-     *(sudoku+row*SIZE+col)=num;
+     
 }
 
 void nahodne_sudoku(void) 
 {   
-     int *sudoku=(int*)malloc(sizeof(int));
+     int *sudoku=(int*)malloc(SIZE*SIZE*sizeof(int));
      
-     for(int row=0;row<SIZE;row++)
-     {
-     for(int col=0;col<SIZE;col++)
-     {
-          generuj_sudoku(sudoku,row,col);   
-     }
-     }
+     generuj_sudoku(sudoku);   
 
      vypis_sudoku(sudoku);
 }
