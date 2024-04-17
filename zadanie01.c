@@ -5,6 +5,7 @@
 #define SIZE 9
 #define OK 0
 #define FAIL 1
+#define N 100
 
 void vypis_sudoku(int *sudoku)
 {
