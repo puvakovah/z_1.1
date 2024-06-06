@@ -9,16 +9,21 @@
 
 void vypis_sudoku(int *sudoku)
 {
-     for (int row = 0; row < SIZE; row++) {
-        for (int col = 0; col < SIZE; col++) {
-            printf("%d ", *(sudoku + row * SIZE + col));
-            if ((col + 1) % 3 == 0 && col < SIZE - 1)
-                printf("| ");
+     for (int row = 0; row < SIZE; row++) 
+     {
+        for (int col = 0; col < SIZE; col++) 
+        {
+               printf("%d ", *(sudoku + row * SIZE + col));
+               if ((col + 1) % 3 == 0 && col < SIZE - 1)
+               printf("| ");
         }
+        
         printf("\n");
-        if ((row + 1) % 3 == 0 && row < SIZE - 1)
-            printf("------+-------+------\n");
+        
+          if ((row + 1) % 3 == 0 && row < SIZE - 1)
+               printf("------+-------+------\n");
     }
+    
     printf("\n");
 }
 
@@ -51,7 +56,6 @@ void generuj_sudoku(int *sudoku)
 {
      int num; 
      
-     srand(time(NULL));
      for (int i = 0; i < SIZE * SIZE; i++) 
      {
         sudoku[i] = 0;
@@ -89,6 +93,7 @@ void nahodne_sudoku(void)
 
 int main()
 {
+     srand(time(NULL));
      nahodne_sudoku();
      return 0;
 }
