@@ -24,27 +24,27 @@ void vypis_sudoku(int *sudoku)
 
 int pozicie(int *sudoku, int row, int col, int num)//funkcia na kontrolu, ci moze byt cislo vlozene na danu poziciu
 {
-     for(int i=0; i<SIZE; i++)//kontrola riadku 
+     for(int i = 0; i < SIZE; i++)//kontrola riadku 
      {
-          if(*sudoku+i*SIZE+col == num )
-          return FAIL;
+          if(*(sudoku + i * SIZE + col) == num )
+          return 1;
      } 
 
-     for(int i=0; i<SIZE; i++)//kontrola stlpca
+     for(int i = 0; i < SIZE; i++)//kontrola stlpca
      {
-          if(*sudoku+row*SIZE+i== num)
-          return FAIL;
+          if(*(sudoku + row * SIZE + i) == num)
+          return 1;
      } 
 
-     for(int i=0; i<3; i++)//schema 3x3
+     for(int i = 0; i < 3; i++)//schema 3x3
      {
-          for(int j=0; j<3; j++)
+          for(int j = 0; j < 3; j++)
           {
                if(*(sudoku+((row-row%3)+i)*SIZE+((col-col%3)+j)) == num)
-               return FAIL;
+               return 1;
           }
      }
-     return OK;
+     return 0;
 }
 
 void generuj_sudoku(int *sudoku)
