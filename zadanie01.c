@@ -52,15 +52,23 @@ void generuj_sudoku(int *sudoku)
      int num; 
      
      srand(time(NULL));
-
-     for(int row=0;row<SIZE;row++)
+     for (int i = 0; i < SIZE * SIZE; i++) 
      {
-          for(int col=0;col<SIZE;col++)
+        sudoku[i] = 0;
+     }
+
+     for(int row = 0; row < SIZE; row++)
+     {
+          for(int col = 0; col < SIZE; col++)
           {
+               int pokus = 0;
                do
                {
-                    num=rand()% SIZE + 1;
-               }while(pozicie(sudoku,row,col,num));
+                    num = rand()% SIZE + 1;
+                    pokus++;
+                    if(pokus > SIZE * SIZE)
+                         break;
+               } while(pozicie(sudoku,row,col,num));
                
                *(sudoku+row*SIZE+col)=num;
           }
