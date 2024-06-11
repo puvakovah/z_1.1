@@ -1,2 +1,2 @@
 # z_1
-pridaním premennej pokus a podmienky if(pokus > SIZE * SIZE) som docielila, ze ak je prilis vela pokusov, teda viac ako je rozmedzie sudoku tak sa opusti cyklus, aby sa zabranilo zacykleniu
+pridaním premennej pokus a podmienky if(pokus > SIZE * SIZE) som docielila, ze ak je prilis vela pokusov, teda viac ako je rozmedzie sudoku tak sa opusti cyklus, aby sa zabranilo zacykleniu . Predtym bolo problemom to, ze cyklus bol nekonecny pretoze generator stale generoval cisla , aj ak sa nedarilo najst take cislo ktore splna pravidla sudoku, potom sa program zacyklil.
