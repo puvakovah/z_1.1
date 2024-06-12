@@ -1,1 +1,2 @@
- vypis_sudoku(sudoku); 
+
+                         break;

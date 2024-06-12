@@ -61,7 +61,7 @@ void generuj_sudoku(int *sudoku)
         sudoku[i] = 0;
      }
 
-     for(int row = 0; row < SIZE; row++)
+     for(int row = 0; row <SIZE; row++)
      {
           for(int col = 0; col < SIZE; col++)
           {
@@ -70,16 +70,24 @@ void generuj_sudoku(int *sudoku)
                {
                     num = rand()% SIZE + 1;
                     pokus++;
-                    if(pokus > SIZE * SIZE)
+                    if(pokus > SIZE * SIZE )
+                    {
+                         for (int r = 0; r <= row; r++)
+                         {
+                              for (int c = 0; c < SIZE; c++)
+                              {
+                                   *(sudoku + r * SIZE + c) = 0;
+                              }
+                         }
+                         
+                         row = -1;
                          break;
+                    }      
                } while(pozicie(sudoku,row,col,num));
-               
+
                *(sudoku+row*SIZE+col)=num;
           }
-     }
-    
-
-     
+     }  
 }
 
 void nahodne_sudoku(void) 
@@ -89,6 +97,8 @@ void nahodne_sudoku(void)
      generuj_sudoku(sudoku);   
 
      vypis_sudoku(sudoku);
+
+     free(sudoku);
 }
 
 int main()
