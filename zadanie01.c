@@ -61,8 +61,24 @@ int generuj_sudoku(int *sudoku, int row, int col)
      if(*(sudoku + row * SIZE + col) != 0)
           return generuj_sudoku(sudoku, row, col + 1);
 
-     for(int num = 1; num <= SIZE; num++)
+     int nums[SIZE];
+
+     for(int i = 0; i < SIZE; i++)
      {
+          nums[i] = i + 1;
+     }
+
+     for(int i = SIZE - 1; i > 0 ; i--)
+     {
+          int j = rand() % (i + 1);
+          int k = nums[i];
+          nums[i] = nums [j];
+          nums[j] = k;
+     }
+
+     for(int i = 0; i < SIZE; i++)
+     {
+          int num = nums[i];
           if(!pozicie(sudoku,row,col,num))
           {
                *(sudoku + row * SIZE + col) = num;
@@ -125,6 +141,7 @@ void nahodne_sudoku(void)
 
 int main()
 {
+     srand(time(NULL));
      nahodne_sudoku();
      return 0;
 }
