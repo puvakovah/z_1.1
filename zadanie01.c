@@ -52,11 +52,28 @@ int pozicie(int *sudoku, int row, int col, int num)//funkcia na kontrolu, ci moz
      return 0;
 }
 
-void generuj_sudoku(int *sudoku)
+int generuj_sudoku(int *sudoku, int row, int col)
 {
-     int num; 
+     if(row == SIZE)
+          return 1;
+     if(col == SIZE)
+          return generuj_sudoku(sudoku, row + 1, 0);
+     if(*(sudoku + row * SIZE + col) != 0)
+          return generuj_sudoku(sudoku, row, col + 1);
+
+     for(int num = 1; num <= SIZE; num++)
+     {
+          if(!pozicie(sudoku,row,col,num))
+          {
+               *(sudoku + row * SIZE + col) = num;
+               if(generuj_sudoku(sudoku,row,col + 1))
+                    return 1;
+               *(sudoku + row * SIZE + col) = 0;
+          }
+     }
+     return 0;
      
-     for (int i = 0; i < SIZE * SIZE; i++) 
+     /*for (int i = 0; i < SIZE * SIZE; i++) 
      {
         sudoku[i] = 0;
      }
@@ -87,14 +104,19 @@ void generuj_sudoku(int *sudoku)
 
                *(sudoku+row*SIZE+col)=num;
           }
-     }  
+     }  */
 }
 
 void nahodne_sudoku(void) 
 {   
      int *sudoku=(int*)malloc(SIZE*SIZE*sizeof(int));
+
+     for(int i = 0; i < SIZE * SIZE; i++)
+     {
+          sudoku[i] = 0;
+     }
      
-     generuj_sudoku(sudoku);   
+     generuj_sudoku(sudoku,0,0);   
 
      vypis_sudoku(sudoku);
 
@@ -103,7 +125,6 @@ void nahodne_sudoku(void)
 
 int main()
 {
-     srand(time(NULL));
      nahodne_sudoku();
      return 0;
 }
